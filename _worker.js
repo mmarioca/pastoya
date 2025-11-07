@@ -1,19 +1,17 @@
-// _worker.js (VERSIÓN CORREGIDA - ANTI-RECUSIÓN)
+// _worker.js (FIX FINAL - NO INTERCEPTA ASSETS)
 
 export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
 
-    // === RUTA ESPECÍFICA: /pasture (POST SOLO) ===
+    // === SOLO MANEJA /pasture (POST) ===
     if (url.pathname === '/pasture' && request.method === 'POST') {
       return await handlePasture(request, env);
     }
 
-    // === PARA TODO LO DEMÁS: SIRVE ARCHIVOS ESTÁTICOS SIN RECURSION ===
-    // Usa el método seguro para Pages: no llama al Worker de nuevo
-    return new Response(await env.ASSETS.fetch(request).then(r => r.text()), {
-      headers: { 'Content-Type': 'text/html' }
-    });
+    // === PARA TODO LO DEMÁS (HTML, CSS, JS, IMGS): PASA DIRECTO A ASSETS ===
+    // Esto evita el loop y sirve archivos estáticos correctamente
+    return env.ASSETS.fetch(request);
   }
 };
 
@@ -60,6 +58,10 @@ Para concretar su pedido y asegurar disponibilidad, por favor responda a este co
         temperature: 0.4,
       })
     });
+
+    if (!response.ok) {
+      throw new Error(`OpenAI error: ${response.status}`);
+    }
 
     const openaiData = await response.json();
     

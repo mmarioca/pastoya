@@ -1,3 +1,5 @@
+
+// Version de la verga 1.4
 // Inicializar jsPDF
 const { jsPDF } = window.jspdf;
 

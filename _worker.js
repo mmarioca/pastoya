@@ -1,9 +1,26 @@
-// functions/pasture/post.js
+// _worker.js (VERSIÓN CORREGIDA - ANTI-RECUSIÓN)
 
-export async function onRequestPost(context) {
+export default {
+  async fetch(request, env, ctx) {
+    const url = new URL(request.url);
+
+    // === RUTA ESPECÍFICA: /pasture (POST SOLO) ===
+    if (url.pathname === '/pasture' && request.method === 'POST') {
+      return await handlePasture(request, env);
+    }
+
+    // === PARA TODO LO DEMÁS: SIRVE ARCHIVOS ESTÁTICOS SIN RECURSION ===
+    // Usa el método seguro para Pages: no llama al Worker de nuevo
+    return new Response(await env.ASSETS.fetch(request).then(r => r.text()), {
+      headers: { 'Content-Type': 'text/html' }
+    });
+  }
+};
+
+async function handlePasture(request, env) {
   let data;
   try {
-    data = await context.request.json();
+    data = await request.json();
   } catch (e) {
     return new Response('Error leyendo JSON', { status: 400 });
   }
@@ -32,7 +49,7 @@ Para concretar su pedido y asegurar disponibilidad, por favor responda a este co
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${context.env.OPENAI_API_KEY}`
+        'Authorization': `Bearer ${env.OPENAI_API_KEY}`
       },
       body: JSON.stringify({
         model: "gpt-3.5-turbo",

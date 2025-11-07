@@ -1,0 +1,314 @@
+:root {
+    --primary-green: #5e7e3e;
+    --primary-green-dark: #4a662f;
+    --bg-light: #eef0f2;
+    --text-dark: #333333;
+    --text-muted: #666666;
+    --white: #ffffff;
+    --border-radius-card: 20px;
+    --border-radius-input: 12px;
+}
+
+/* --- BASE (MÓVIL PRIMERO) --- */
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--bg-light);
+    color: var(--text-dark);
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    overscroll-behavior-y: none;
+}
+
+/* --- APP CONTAINER --- */
+#wizardForm {
+    width: 100%;
+    background-color: var(--bg-light);
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* --- LOGO FIXED --- */
+.top-logo {
+    position: fixed; /* Fixed para que flote sobre todo incluso al hacer scroll */
+    top: 25px;
+    right: 25px;
+    z-index: 999;
+}
+.top-logo img {
+    width: 60px;
+    height: auto;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+}
+
+/* --- STEPS --- */
+.step {
+    display: none;
+    width: 100%;
+    min-height: 100vh;
+    flex-direction: column;
+    animation: fadeIn 0.4s ease-in-out;
+}
+.step.active { display: flex; }
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- IMÁGENES --- */
+.hero-image, .header-image {
+    width: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+}
+.hero-image {
+    height: 60vh;
+    border-bottom-left-radius: 35px;
+    border-bottom-right-radius: 35px;
+}
+.header-image {
+    height: 30vh;
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+}
+.spacer-top {
+    height: 100px;
+    min-height: 100px;
+    flex-shrink: 0;
+}
+
+/* --- CONTENIDO --- */
+.content-box {
+    padding: 30px 25px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.content-box.intro-content {
+    justify-content: flex-start;
+    padding-top: 40px;
+}
+.content-box.scrollable {
+    justify-content: flex-start;
+}
+
+/* --- TYPOGRAPHY --- */
+h1 {
+    font-size: 2.4rem;
+    line-height: 1.15;
+    margin: 0 0 15px 0;
+    color: var(--text-dark);
+    letter-spacing: -0.5px;
+}
+h2 {
+    font-size: 1.5rem;
+    margin: 0 0 25px 0;
+    font-weight: 500;
+    line-height: 1.3;
+}
+p {
+    color: var(--text-muted);
+    margin-bottom: 35px;
+    line-height: 1.6;
+    font-size: 1.05rem;
+}
+strong { font-weight: 700; }
+.mt-4 { margin-top: 2rem; }
+.mt-small { margin-top: 1.5rem; margin-bottom: 10px; font-size: 1.15rem; font-weight: 600; }
+
+/* --- INPUTS --- */
+.input-group { margin-bottom: 20px; width: 100%; }
+.input-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--text-dark);
+    margin-left: 5px;
+}
+input[type="text"], input[type="number"], input[type="tel"] {
+    width: 100%;
+    padding: 16px 20px;
+    border: 2px solid transparent;
+    border-radius: var(--border-radius-input);
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem;
+    background-color: var(--white);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    box-sizing: border-box;
+    transition: all 0.3s;
+}
+input:focus {
+    outline: none;
+    border-color: var(--primary-green);
+    box-shadow: 0 4px 20px rgba(94, 126, 62, 0.15);
+}
+
+/* --- OPCIONES (RADIO) --- */
+.options-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 30px;
+}
+.options-list.compact { gap: 10px; margin-bottom: 25px; }
+
+.radio-option {
+    display: block;
+    position: relative;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+}
+.radio-option input { display: none; }
+.radio-option span {
+    display: flex;
+    align-items: center;
+    padding: 16px 20px;
+    background-color: var(--white);
+    border-radius: var(--border-radius-input);
+    font-weight: 500;
+    color: var(--text-muted);
+    transition: all 0.2s;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+    border: 2px solid transparent;
+}
+.radio-option span::before {
+    content: '';
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin-right: 15px;
+    border: 2px solid #d1d1d1;
+    border-radius: 50%;
+    transition: all 0.2s;
+    flex-shrink: 0;
+}
+.radio-option input:checked ~ span {
+    color: var(--text-dark);
+    border-color: var(--primary-green);
+    background-color: #f9fbf7;
+    box-shadow: 0 4px 12px rgba(94, 126, 62, 0.15);
+}
+.radio-option input:checked ~ span::before {
+    border-color: var(--primary-green);
+    background-color: var(--primary-green);
+    box-shadow: inset 0 0 0 4px var(--white);
+}
+
+/* --- IMAGEN OPCIONES (Paso 5) --- */
+.image-options {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+.image-option {
+    position: relative;
+    height: 100px;
+    border-radius: var(--border-radius-card);
+    background-size: cover;
+    background-position: center;
+    overflow: hidden;
+    cursor: pointer;
+    display: flex;
+    align-items: flex-end;
+    padding: 15px 20px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    transition: transform 0.2s;
+}
+.image-option:active { transform: scale(0.98); }
+.image-option input { display: none; }
+.image-option::after {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.7), transparent); z-index: 1;
+}
+.image-option .caption {
+    position: relative; z-index: 2; color: white; font-weight: 700;
+    font-size: 1.2rem; text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+}
+.image-option .checkmark {
+    position: absolute; top: 15px; right: 15px;
+    width: 26px; height: 26px; background-color: rgba(255,255,255,0.9);
+    border-radius: 50%; z-index: 2; display: flex;
+    align-items: center; justify-content: center;
+}
+.image-option input:checked ~ .checkmark { background-color: var(--primary-green); }
+.image-option input:checked ~ .checkmark::after { content: '✓'; color: white; font-weight: bold; font-size: 14px; }
+
+/* --- BOTONES --- */
+.btn-next, .btn-home {
+    width: 100%;
+    padding: 18px;
+    background-color: var(--primary-green);
+    color: white;
+    border: none;
+    border-radius: 35px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    margin-top: auto;
+    box-shadow: 0 10px 20px -10px rgba(94, 126, 62, 0.5);
+    box-sizing: border-box; /* Para el enlace <a> */
+}
+.btn-next:hover, .btn-home:hover {
+    background-color: var(--primary-green-dark);
+    transform: translateY(-2px);
+}
+.btn-next:active { transform: scale(0.98) translateY(0); }
+.btn-next:disabled { background-color: #ccc; cursor: not-allowed; transform: none; box-shadow: none; }
+
+/* --- FINAL SCREEN --- */
+.centered-content { align-items: center; text-align: center; padding-top: 80px; }
+.success-icon {
+    width: 120px; height: 120px; margin-bottom: 30px;
+    animation: popIn 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+@keyframes popIn {
+    0% { transform: scale(0); opacity: 0; }
+    80% { transform: scale(1.1); opacity: 1; }
+    100% { transform: scale(1); }
+}
+.footer-logo { width: 150px; margin-top: 60px; opacity: 0.9; }
+.footer-text { font-size: 0.85rem; margin-top: 10px; opacity: 0.7; }
+
+/* ================= DESKTOP VIEW MEJORADO ================= */
+@media (min-width: 768px) {
+    body {
+        align-items: flex-start; /* Alineación superior para permitir scroll natural */
+        padding: 40px 0;
+        /* FONDO DESKTOP: Imagen con superposición gris al 95% (muy sutil) */
+        background: linear-gradient(rgba(220, 225, 229, 0.95), rgba(220, 225, 229, 0.95)), url('images/bg_intro.jpg') no-repeat center center fixed;
+        background-size: cover;
+        overflow-y: auto; /* Permitir scroll en el cuerpo principal */
+    }
+
+    #wizardForm {
+        max-width: 420px;
+        /* ALTURA AUTOMÁTICA: Si el contenido crece, la caja crece y el navegador hace scroll */
+        height: auto;
+        min-height: 850px; 
+        margin: 0 auto;
+        border-radius: 40px;
+        box-shadow: 0 30px 60px -20px rgba(0,0,0,0.3);
+        overflow: visible; /* Quitamos scroll interno */
+    }
+
+    .step {
+        min-height: 850px; /* Altura mínima base para mantener consistencia */
+    }
+
+    /* Ajustes de imagen fija en desktop */
+    .hero-image { height: 400px; }
+    .header-image { height: 280px; }
+    .spacer-top { height: 80px; min-height: 80px; }
+}

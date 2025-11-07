@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Recomendador de Pasturas | Grupo Sudamérica</title>
+    <link rel="stylesheet" href="style.css?v=1.2">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="top-logo">
+        <img src="images/semillas_sudamerica.png" alt="Grupo Sudamérica">
+    </div>
+
+    <form id="wizardForm">
+
+        <div class="step active" id="step-1">
+            <div class="hero-image" style="background-image: url('images/bg_intro.jpg');"></div>
+            <div class="content-box intro-content">
+                <h1>Te ayudamos a elegir tu <strong>pasto</strong></h1>
+                <p>Conoce cuál es el pasto ideal para tu producción ahora</p>
+                <button type="button" class="btn-next" onclick="nextStep(2)">Comienza ➜</button>
+            </div>
+        </div>
+
+        <div class="step" id="step-2">
+            <div class="spacer-top"></div>
+            <div class="content-box">
+                <h2>¿Dónde se ubica tu propiedad?</h2>
+                <div class="input-group">
+                    <label>Ciudad</label>
+                    <input type="text" name="ciudad" placeholder="Ej. Pedro Juan Caballero">
+                </div>
+                <div class="input-group">
+                    <label>Departamento</label>
+                    <input type="text" name="departamento" placeholder="Ej. Amambay">
+                </div>
+                <button type="button" class="btn-next" onclick="nextStep(3)">Siguiente ➜</button>
+            </div>
+        </div>
+
+        <div class="step" id="step-3">
+            <div class="header-image" style="background-image: url('images/header_activity.jpg');"></div>
+            <div class="content-box">
+                <h2>Actividad principal:</h2>
+                <div class="options-list">
+                    <label class="radio-option">
+                        <input type="radio" name="actividad" value="Solo Ganadería">
+                        <span>Solo Ganadería</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="actividad" value="Solo Agricultura">
+                        <span>Solo Agricultura</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="actividad" value="Mixto">
+                        <span>Mixto</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="actividad" value="Otros">
+                        <span>Otros</span>
+                    </label>
+                </div>
+                <button type="button" class="btn-next" onclick="nextStep(4)">Siguiente ➜</button>
+            </div>
+        </div>
+
+        <div class="step" id="step-4">
+            <div class="header-image" style="background-image: url('images/header_cattle.jpg');"></div>
+            <div class="content-box">
+                <h2>Tipo de ganadería:</h2>
+                <div class="options-list">
+                    <label class="radio-option">
+                        <input type="radio" name="tipo_ganaderia" value="Cría">
+                        <span>Cría</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="tipo_ganaderia" value="Recría">
+                        <span>Recría</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="tipo_ganaderia" value="Engorde">
+                        <span>Engorde</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="tipo_ganaderia" value="Lechería">
+                        <span>Lechería</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="tipo_ganaderia" value="No aplica">
+                        <span>No aplica</span>
+                    </label>
+                </div>
+                <button type="button" class="btn-next" onclick="nextStep(5)">Siguiente ➜</button>
+            </div>
+        </div>
+
+        <div class="step" id="step-5">
+            <div class="spacer-top"></div>
+            <div class="content-box scrollable">
+                <h2>Tipo de <strong>suelo</strong>:</h2>
+                <div class="image-options">
+                    <label class="image-option" style="background-image: url('images/suelo_arenoso.jpg');">
+                        <input type="radio" name="suelo" value="Arenoso">
+                        <span class="caption">Suelo Arenoso</span>
+                        <span class="checkmark"></span>
+                    </label>
+                    <label class="image-option" style="background-image: url('images/suelo_arcilloso.jpg');">
+                        <input type="radio" name="suelo" value="Arcilloso">
+                        <span class="caption">Suelo Arcilloso</span>
+                        <span class="checkmark"></span>
+                    </label>
+                    <label class="image-option" style="background-image: url('images/suelo_mixto.jpg');">
+                        <input type="radio" name="suelo" value="Mixto">
+                        <span class="caption">Suelo Mixto</span>
+                        <span class="checkmark"></span>
+                    </label>
+                </div>
+
+                <h2 class="mt-4">¿Se inunda?</h2>
+                <div class="options-list compact">
+                     <label class="radio-option">
+                        <input type="radio" name="inundable" value="Si">
+                        <span>Si, a veces</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="inundable" value="No">
+                        <span>No, nunca</span>
+                    </label>
+                </div>
+                <button type="button" class="btn-next" onclick="nextStep(6)">Siguiente ➜</button>
+            </div>
+        </div>
+
+        <div class="step" id="step-6">
+             <div class="spacer-top"></div>
+             <div class="content-box scrollable">
+                <h2>Uso principal del pasto:</h2>
+                <div class="options-list compact">
+                    <label class="radio-option"><input type="radio" name="uso_pasto" value="Pastoreo directo"><span>Pastoreo directo</span></label>
+                    <label class="radio-option"><input type="radio" name="uso_pasto" value="Heno o ensilaje"><span>Heno o ensilaje</span></label>
+                    <label class="radio-option"><input type="radio" name="uso_pasto" value="Cobertura agricultura"><span>Cobertura para agricultura</span></label>
+                </div>
+
+                <h2 class="mt-small">Nivel de humedad:</h2>
+                <div class="options-list compact">
+                    <label class="radio-option"><input type="radio" name="humedad" value="Seco"><span>Seco (Baja retención)</span></label>
+                    <label class="radio-option"><input type="radio" name="humedad" value="Moderado"><span>Moderado (Normal)</span></label>
+                    <label class="radio-option"><input type="radio" name="humedad" value="Alto"><span>Alto (Retiene agua)</span></label>
+                </div>
+
+                <h2 class="mt-small">Carga animal esperada:</h2>
+                 <div class="input-group">
+                    <input type="number" name="carga_animal" placeholder="Ej. 2.5 (animales/ha)">
+                </div>
+
+                <button type="button" class="btn-next" onclick="nextStep(7)">Siguiente ➜</button>
+             </div>
+        </div>
+
+<div class="step" id="step-7">
+            <div class="header-image" style="background-image: url('images/header_contact.jpg');"></div>
+            <div class="content-box">
+                <h2>Completa tus datos para <strong>descargar</strong> tu resultado. Un asesor entrará en contacto contigo pronto.</h2>
+                <div class="input-group">
+                    <label>Nombre y Apellido</label>
+                    <input type="text" id="nombre_cliente" name="nombre" placeholder="Tu nombre completo">
+                </div>
+                <div class="input-group">
+                    <label>N° de WhatsApp</label>
+                    <input type="tel" id="whatsapp_cliente" name="whatsapp" placeholder="Ej. 09xx xxx xxx">
+                </div>
+                <button type="button" class="btn-next" onclick="finalizeForm()">Descargar Resultado ➜</button>
+            </div>
+        </div>
+
+        <div class="step" id="step-final">
+            <div class="spacer-top"></div>
+            <div class="content-box centered-content">
+                <img src="images/icon_success.png" alt="Éxito" class="success-icon">
+                <h2>Ya recibimos tu encuesta. Muy pronto estaremos en <strong>contacto</strong></h2>
+                
+                <a href="https://www.gruposudamerica.com" target="_blank" class="btn-home" style="text-decoration: none; display: inline-block; text-align: center;">
+                    Ir al sitio ➜
+                </a>
+
+                <img src="images/logo_grupo_sudamerica_footer.png" alt="Grupo Sudamérica" class="footer-logo">
+                <p class="footer-text">Más de 14 años junto al productor.</p>
+            </div>
+        </div>
+
+    </form>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="script.js?v=1.2"></script>
+</body>
+</html>
+
